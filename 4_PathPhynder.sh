@@ -1,24 +1,24 @@
 # 1 Prepare files for phylogenetic placement
-vcf=
-tree=
-out_dir=
-prepare=$out_dir/tree_data
+vcf= # filtered bi-allelic vcf.gz file 
+tree= # ultrametric tree, nwk format
+phynder_dir= # output folder for phynder
+
 
 # pathPhynder v1.2.3
-phynder -B -o $out_dir/$prefix.snp $tree $vcf
-cd $out_dir
-pathPhynder -s prepare -i $tree -p $prefix -f $out_dir/$prefix.snp
+phynder -B -o $phynder_dir/$prefix.snp $tree $vcf
+cd $phynder_dir
+pathPhynder -s prepare -i $tree -p $prefix -f $phynder_dir/$prefix.snp
 cd -
 
 
 # 2 Phylogenetic placement
-fq=
-sample=
+fq= # $sample.enrich.fq
+sample= # sample ID
 ref= # $prefix.consensus.fasta
-out_dir=
+out_dir= # output folder
 mkdir -p $out_dir
-tree=
-prepare=
+tree= # ultrametric tree, nwk format
+prepare=$phynder_dir/tree_data
 
 bwa index $ref
 bwa aln -n 0.05 -t 1 -l 1000 $ref $fq > $out_dir/$sample.sai
