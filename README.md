@@ -1,5 +1,6 @@
 # Animal mitochondrial eDNA phylogenetic placement for the Tjörnin dataset
-Workflow and scripts for mitochondrial phylogenetic placement of animal ancient eDNA from Lake Tjörnin, Reykjavík, including reference panel assembling, tree construction, target DNA extraction, and PathPhynder-based lineage assignment.
+This repo contains the workflow and scripts for mitochondrial phylogenetic placement of animal ancient eDNA from Lake Tjörnin, Reykjavík, including reference panel assembling, tree construction, target DNA extraction, and PathPhynder-based lineage assignment.
+Codes/commends for running each step of the analysis are contained in the given scrips. One would need to edit the parameters on top of each script for modifying specific file names, CPU threads, and memory limits before running the codes/ commends.
 
 ## ⚙️ Workflow Overview
 
