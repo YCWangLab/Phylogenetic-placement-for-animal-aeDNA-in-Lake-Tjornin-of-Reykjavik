@@ -12,7 +12,7 @@ Builds the mitochondrial reference panel for phylogenetic inference.
 Generates phylogenetic tree.
 
 ### **3️⃣ Target DNA Extraction**
-`3_Target_species_enrichment.sh`  
+`3_Target_reads_extraction.sh`  
 Identifies reads from target taxa.
 
 ### **4️⃣ PathPhynder Placement**
