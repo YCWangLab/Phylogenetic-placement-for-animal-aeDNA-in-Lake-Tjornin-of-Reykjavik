@@ -1,23 +1,23 @@
-# Phylogenetic-placement-for-animal-aeDNA-in-Lake-Tjornin-of-Reykjavik
-Computational workflow and scripts for phylogenetic placement of animal ancient environmental DNA (aeDNA) from Lake Tjörnin, Reykjavík. Includes reference panel construction, tree inference, target species enrichment, and PathPhynder-based lineage assignment.
+# Animal mitochondrial eDNA phylogenetic placement for the Tjörnin dataset
+Workflow and scripts for mitochondrial phylogenetic placement of animal ancient eDNA from Lake Tjörnin, Reykjavík, including reference panel assembling, tree construction, target DNA extraction, and PathPhynder-based lineage assignment.
 
 ## ⚙️ Workflow Overview
 
-### **1️⃣ Reference Panel Construction**
+### **1️⃣ Reference Panel Assembling**
 `1_Reference_panel_construction.sh`  
-Builds the mitochondrial reference panel for downstream phylogenetic inference.
+Builds the mitochondrial reference panel for phylogenetic inference.
 
 ### **2️⃣ Phylogenetic Tree Construction**
 `2_Phylogenetic_tree_construction.sh`  
-Generates phylogenetic tree for PathPhynder.
+Generates phylogenetic tree.
 
-### **3️⃣ Target Species Enrichment**
+### **3️⃣ Target DNA Extraction**
 `3_Target_species_enrichment.sh`  
-Identifies sequences belonging to target taxa for focused phylogenetic placement.
+Identifies reads from target taxa.
 
-### **4️⃣ PathPhynder Analysis**
+### **4️⃣ PathPhynder Placement**
 `4_PathPhynder.sh`  
-Runs PathPhynder to assign query sequences to reference nodes on the phylogenetic tree for lineage placement and taxonomic validation.
+Performs PathPhynder to assign query reads to reference nodes on the phylogenetic tree for lineage placement.
 
 ---
 
@@ -35,9 +35,7 @@ Runs PathPhynder to assign query sequences to reference nodes on the phylogeneti
 ## 📁 Intermediate Files
 
 The folder **`Intermediate_files/`** contains:
-- Mitochondrial genome sequences used as reference data.  
+- Mitochondrial genome sequences used in reference panel.  
 - Ultrametric tree files infered with BEAST.  
-
-These files are retained for **verification**, **reproducibility**, and **inspection** of each stage in the workflow.
 
 ---
