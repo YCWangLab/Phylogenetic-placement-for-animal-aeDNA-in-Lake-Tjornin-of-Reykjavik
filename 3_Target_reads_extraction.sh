@@ -1,7 +1,7 @@
 # 1. Extract mitochondrial reads of target species
 fq_path= # aeDNA fastq from different ages
 ref= # $prefix.consensus.fasta for each species
-suffix=
+suffix= # .fq, .fastq, .fq.gz, or .fastq.gz
 thread=
 out_dir=
 
@@ -19,16 +19,16 @@ done
 
 # 2. Remove noise
 # # 2.1 Competitive mapping
-fq=
+fq= # merged $sample.enrich.fastq, i.e., cat *.enrich.fastq
 out_dir=
 thread=
-DB=
-names_dmp=
-nodes_dmp=
-acc2tax=
-taxa=
-output_base=
-ngsLCA_py=
+DB= # bowtie2 indexed database
+names_dmp= # names.dmp, NCBI format
+nodes_dmp= # nodes.dmp, NCBI format
+acc2tax= # accession2taxid map file, NCBI format
+taxa= # target taxa, e.g., Bos, Sus, Equus
+output_base= # output prefix
+ngsLCA_py= # path to run_ngsLCA.py
 
 bam_path=$out_dir/${output_base}_bam
 mkdir -p $bam_path
