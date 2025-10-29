@@ -2,8 +2,8 @@
 # # i.e., replace the reference with alternative SNPs and InDels for each samples
 vcf= # the *raw.vcf.gz from 1_Reference_panel_construction.sh - Step. 4
 ref= # consensus genome 
-out_dir=
-prefix=
+out_dir= # output folder
+prefix= # job prefix
 mkdir -p $out_dir
 temp=$out_dir/temp
 mkdir -p $temp
@@ -23,15 +23,13 @@ rm -rf $temp
 # # 2.1 alignment with mafft
 input_fasta=$prefix.vcf_consensus.fasta
 thread=
-prefix=
-sbatch -J $job_name.aln -o $work_path/$job_name.aln.log $scripts_path/alignment_mafft.slurm $input_fasta $job_name $thread $output_type
 mafft --auto --adjustdirection --thread $thread $input_fasta > $prefix.aligned
 trimal -in $prefix.aligned -out $prefix.aligned.trimmed.aln -automated1 $trimal_opt
 rm $prefix.aligned
 
 # # 2.2 make beast template xml
-template=ultrametric_tree_template.xml
-chain_length=1000000000
+template=ultrametric_tree_template.xml 
+chain_length=1000000000 # make sure the ESS for each parameter higher than 200
 store_every=5000
 prefix=
 python make_beast_xml.py --xml_template $template --fasta_file $prefix.aligned.trimmed.aln --output_file $prefix.ultrametricTree.xml --prefix $prefix --chain_length $chain_length --store_every $store_every
@@ -40,7 +38,7 @@ python make_beast_xml.py --xml_template $template --fasta_file $prefix.aligned.t
 # beast v2.7.7
 out_dir=
 prefix=
-xml=
+xml= # xml file from step 2.2
 beast -beagle -threads $thread  -prefix $out_dir/$prefix -overwrite $xml
 # # Get consensus tree using logcombiner and treeannotator if multiple beast were run
 logcombiner -b 10 -log run1.log -log run2.log -log run3.log -o $prefix.combined.log
