@@ -1,9 +1,9 @@
 # 1. Call consensus genomes
-fasta=
-prefix=
+multi_fasta= # multi-fasta file of population mitogenomes
+prefix= # job prefix
 thread=
 # MAFFT v7.490
-mafft --auto --adjustdirection --thread $thread $fasta > $prefix.aligned
+mafft --auto --adjustdirection --thread $thread $multi_fasta > $prefix.aligned
 # EMBOSS v6.6.0.0
 cons -sequence $prefix.aligned -outseq $prefix.consensus.temp -identity 0 -plurality 0 -name ${prefix}_consensus -auto
 sed '/^>/!s/[a-z]/\U&/g' $prefix.consensus.temp | sed 's/-/N/g' > $prefix.consensus.fasta
@@ -12,8 +12,8 @@ bwa index $prefix.consensus.fasta
 
 
 # 2. Get error-free pair-end reads from haploid genomes
-multi_fasta=
-out_dir=
+multi_fasta= # multi-fasta file of population mitogenomes
+out_dir= # output folder
 
 temp_dir=$out_dir/temp
 mkdir -p $temp_dir
@@ -31,15 +31,14 @@ for fasta in $temp_dir/*fasta; do
     art_illumina -ss HS25 -ef -p -l 150 -f 50 -m 500 -s 10  -i $fasta -o ${out_dir}/${header}_
 done
 
-rm $out_dir/*.aln
 rm -rf $temp_dir
 
 
 # 3. Map reads to consensus genome using BWA MEM 
 fq_path= # out_dir of Step. 2
-bam_path=
+bam_path= # output folder for bam files
 mkdir -p $bam_path
-ref= # consensus genome
+ref= # consensus genome, i.e., $prefix.consensus.fasta
 # bwa v0.7.19-r1273
 bwa index $ref
 
@@ -57,12 +56,12 @@ done
 
 
 # 4. SNP calling with short reads using GATK HaplotypeCaller
-ref= # consensus genome
-bam_path= 
+ref= # consensus genome, i.e., $prefix.consensus.fasta
+bam_path= # folder for bam files
 suffix=.dd.bam
-gvcf_path=
+gvcf_path= # output folder for g.vcf files
 mkdir -p $gvcf_path
-samtools faidx $ref
+samtools faidx $ref 
 # gatk v4.3.0.0
 gatk CreateSequenceDictionary -R $ref -O ${ref%.*}.dict
 
