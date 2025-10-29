@@ -1,4 +1,4 @@
-# 1. Enrich mitochondrial reads of target species
+# 1. Extract mitochondrial reads of target species
 fq_path= # aeDNA fastq from different ages
 ref= # $prefix.consensus.fasta for each species
 suffix=
